@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+<div class="container">
+  <br>
+
+<form class="" action="" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" name="" value="Dodaj">
+</form>
+<br>
+<ul class="list-group">
+  {% for i in kreirani %}
+  <li class="list-group-item">{{ i }}</li>
+  {% endfor %}
+</ul>
+
+</div>
+{% endblock %}
