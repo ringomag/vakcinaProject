@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import VakcinisanForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
@@ -17,3 +18,7 @@ def index(request):
 
     context = {'form':form, 'kreirani':kreirani}
     return render(request, 'index.html', context)
+
+def delete(request, id):
+    Vakcinisan.objects.get(id=id).delete()
+    return HttpResponseRedirect('/')

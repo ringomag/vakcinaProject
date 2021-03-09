@@ -7,17 +7,28 @@
 <div class="container">
   <br>
 
-<form class="" action="" method="POST">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" name="" value="Dodaj">
-</form>
-<br>
-<ul class="list-group">
-  {% for i in kreirani %}
-  <li class="list-group-item">{{ i }}</li>
-  {% endfor %}
-</ul>
+  <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="" value="Dodaj" style="margin-left:5px;">
+  </form>
+  <br>
+
+  <div class="row">
+    <div class="col-sm">
+      <ul class="list-group">
+        {% for i in kreirani %}
+        <li class="list-group-item">
+          {{ i }}
+          <form class="float-end" action="delete/{{i.id}}" method="POST">
+            {% csrf_token %}
+          <input type="submit" name="delete" value="Obriši">
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    </div>
 
 </div>
 {% endblock %}
