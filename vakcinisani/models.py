@@ -14,4 +14,4 @@ class Vakcinisan(models.Model):
     vakcina = models.CharField(max_length=100, choices=vrste_vakcina)
 
     def __str__(self):
-        return self.ime + ' ' + self.prezime
+        return self.ime + ' ' + self.prezime + ' ' + self.vakcina
