@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-
-
-
 {% block content %}
 <div class="container">
   <br>
@@ -14,19 +11,34 @@
   </form>
   <br>
 
-  <div class="row">
-    <div class="col-sm">
-      <ul class="list-group">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Vaccine</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
         {% for i in kreirani %}
-        <li class="list-group-item">
-          {{ i }}
-          <form class="float-end" action="delete/{{i.id}}" method="POST">
-            {% csrf_token %}
+        <td>{{i.ime}}</td>
+        <td>{{i.prezime}}</td>
+        <td style="color:green">{{i.vakcina}}</td>
+        <td>
+          <form class="float-none" action="delete/{{i.id}}" method="POST">
+          {% csrf_token %}
           <input type="submit" name="delete" value="Obriši">
           </form>
-        </li>
-        {% endfor %}
-      </ul>
+       </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
     </div>
     </div>
 
