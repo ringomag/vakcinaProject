@@ -6,8 +6,34 @@
 
   <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" name="" value="Dodaj" style="margin-left:5px;">
+    <ul class="list-group">
+      <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
+      <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
+      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
+    </ul>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Dodaj
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Da li ste sigurni da zelite da primite vakcinu {{form.vakcina}}?  <!--kako ovde izabrati selektovanu vakcinu jebem mu sve--!>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <input class="btn btn-success" type="submit" name="" value="Da" style="margin-left:5px;">
+      </div>
+    </div>
+  </div>
+</div>
   </form>
   <br>
 
@@ -16,6 +42,7 @@
       <tr>
         <th scope="col">First</th>
         <th scope="col">Last</th>
+        <th scope="col">JMBG</th>
         <th scope="col">Vaccine</th>
         <th scope="col">Delete</th>
       </tr>
@@ -25,6 +52,9 @@
         {% for i in kreirani %}
         <td>{{i.ime}}</td>
         <td>{{i.prezime}}</td>
+        <td>{{i.jmbg}}</td>
+
+
         <td style="color:green">{{i.vakcina}}</td>
         <td>
           <form class="float-none" action="delete/{{i.id}}" method="POST">
@@ -39,8 +69,6 @@
 
 
 
-    </div>
-    </div>
-
 </div>
+
 {% endblock %}
