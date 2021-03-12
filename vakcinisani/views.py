@@ -12,6 +12,8 @@ def index(request):
     alergija = Vakcinisan.alergija
     if request.method == "POST":
         form = VakcinisanForm(request.POST)
+        # import pdb
+        # pdb.set_trace() #ovo moze da se ubaci, kao debuger, pre cuvanja u bazi
         if form.is_valid():
             form.save()
             return redirect('/')

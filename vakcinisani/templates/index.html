@@ -12,12 +12,12 @@
       <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
     </ul>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="dodaj_dugme">
   Dodaj
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!-- odavde pocinje modal, koji uyzima javascrpit -->
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -25,7 +25,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Da li ste sigurni da zelite da primite vakcinu {{form.vakcina}}?  <!--kako ovde izabrati selektovanu vakcinu jebem mu sve--!>
+        Da li ste sigurni da zelite da primite vakcinu <span id="vrednost_vakcine"> </span>?  <!--kako ovde izabrati selektovanu vakcinu jebem mu sve--!>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -71,4 +71,43 @@
 
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+  // ovde uzima od gornjeg modala
+  var myModal = document.getElementById('exampleModal')
+
+console.log(myModal);
+// slusam dogadja bootstrapa koji se zove shown.bs.modal
+myModal.addEventListener('shown.bs.modal', function () {
+  console.log('kurcina');
+  var vakcinaField = document.getElementById('id_vakcina');
+  var vakcinaFieldVrednost = vakcinaField.value;
+  var vrednost_vakcine_span = document.getElementById('vrednost_vakcine');
+  console.log('vrednost_vakcine', vrednost_vakcine_span);
+  vrednost_vakcine_span.innerHTML = vakcinaFieldVrednost;
+  console.log('vakcinaField', vakcinaField);
+  console.log(vakcinaField.value);
+});
+
+var alergija_check_box = document.getElementById('id_alergija');
+function disabled_funkcija() {
+  console.log('ucitana funkcija');
+  var element_na_kome_se_desio_event = document.getElementById('id_alergija');
+  var dugme_koje_ce_biti_disabled = document.getElementById('dodaj_dugme');
+  if (element_na_kome_se_desio_event.checked) {
+    console.log('cekirano');
+    dugme_koje_ce_biti_disabled.setAttribute("disabled", true);
+  }
+  else {
+    console.log('necekirano');
+    dugme_koje_ce_biti_disabled.removeAttribute("disabled");
+  }
+}
+alergija_check_box.addEventListener('click', disabled_funkcija);
+
+
+</script>
 {% endblock %}
