@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block heading %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg" style="text-align:center">
+      <br>
+      <h1>Dobro došli na početnu stranicu "Covid-19 Vaccine"</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+      {% block links %}
+      <br>
+          <div class="container">
+            <div class="row">
+              <div class="col" style="text-align:center">
+                <a href="{% url 'novi' %}" style="padding-right:20px">Prijava za vakcinu</a>
+                <button id="dugme_za_drugu_stranu" type="button" name="button">Lista vakcinisanih</button>
+              </div>
+            </div>
+        </div>
+          {% block scripts %}
+          <script type="text/javascript">
+            document.getElementById("dugme_za_drugu_stranu").onclick = function () {
+              location.href = "{% url 'lista' %}";
+              };
+          </script>
+          {% endblock %}
+
+      {% endblock %}

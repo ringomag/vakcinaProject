@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block list %}
+
+<div class="container">
+  <br>
+  <h3>Lista vakcinisanih građana:</h3>
+  <br>
+  <ul class="list-group" id="moja_lista" name="lista">
+    {% for i in kreirani %}
+    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span id="vakcina_oboji">{{i.vakcina}}</span></li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script>
+  var astra = document.getElementById('vakcina_oboji');
+  var astra_vrednost = astra.value;
+  function crveno(){
+    console.log("mladja");
+    if (astra.value == 'Astra Zeneka'){
+      astra_vrednost.style.color="red";
+    }
+    else{
+      console.log('ringoo');
+    }
+  }
+
+
+</script>
+{% endblock %}
