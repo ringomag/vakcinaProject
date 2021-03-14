@@ -9,7 +9,7 @@
   <br>
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span id="vakcina_oboji">{{i.vakcina}}</span></li>
+    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span class="vakcina_oboji">{{i.vakcina}}</span></li>
     {% endfor %}
   </ul>
 </div>
@@ -19,18 +19,35 @@
 {% block scripts %}
 {{block.super}}
 <script>
-  var astra = document.getElementById('vakcina_oboji');
-  var astra_vrednost = astra.value;
-  function crveno(){
-    console.log("mladja");
-    if (astra.value == 'Astra Zeneka'){
-      astra_vrednost.style.color="red";
-    }
-    else{
-      console.log('ringoo');
-    }
-  }
+  // var astra = document.getElementById('vakcina_oboji');
+  // var astra_vrednost = astra.value;
+  // function crveno(){
+  //   console.log("mladja");
+  //   if (astra.value == 'Astra Zeneka'){
+  //     astra_vrednost.style.color="red";
+  //   }
+  //   else{
+  //     console.log('ringoo');
+  //   }
+  // }
 
 
+    // prvo vise spanova ti je imalo isti id("vakcina_oboji").
+    //to znaci da funkcija var astra = document.getElementById('vakcina_oboji'); vrati samo prvi element. primeti da se funckija zove sa jedninom getElementById.
+    //taj prvi element ti nema vrednost astra zeneke tako da ga ne oboji. a ostale ne uzme u obzir.
+    // zato smo dodali spanovima klasu(ne mora jedinstvena da bude. vidi gore u htmlu).
+    //Koristimo funkciju document.getElementsByClassName("vakcina_oboji") koja vrati listu spanova koji imaju klasu vakcina_oboji
+    //Zatim prodjemo for petlljom kroz svaki element i poredimo da li je vrednost Astra Zeneka. Ako jeste, dodamo color red.
+    // eto ga 
+    var astra = document.getElementsByClassName("vakcina_oboji");
+    console.log('lista elemenata sa klasom vakcina_oboji', astra);
+    for (var i = 0; i < astra.length; i++) {
+      var astra_vrednost = astra[i].innerHTML;
+      console.log('astra_vrednost-vrednost svakog elementa liste spanova-'+i, astra_vrednost);
+      if (astra_vrednost == 'Astra Zeneka'){
+        astra[i].style.color="red";
+      }
+    }
+ 
 </script>
 {% endblock %}
