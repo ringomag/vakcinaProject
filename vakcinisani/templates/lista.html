@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 
-
 {% block list %}
-
 <div class="container">
   <br>
   <h3>Lista vakcinisanih građana:</h3>
   <br>
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-
-
-    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------{% if i.vakcina == "Sinofarm" %}
-                                                                <span class="vakcina_oboji sinofarm">{{i.vakcina}}</span>
-                                                              {% else %}<span class="vakcina_oboji">{{i.vakcina}}</span>
-                                                              {% endif %}</li>
+    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span class="vakcina_oboji sinofarm {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span></li>
     {% endfor %}
   </ul>
 </div>
+{% endblock %}
 
+{% block footer %}
+<footer>
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  © 2021 Copyright: Vaccine</div>
+</footer>
 {% endblock %}
 
 {% block scripts %}

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block heading %}
 <div class="container">
   <div class="row">
     <div class="col-lg" style="text-align:center">
       <br>
-      <h1>Dobro došli na početnu stranicu "Covid-19 Vaccine"</h1>
+      <h1>Dobro došli na početnu stranicu "Covid-19 Vaccine" <i class="fas fa-syringe"></i></h1>
     </div>
   </div>
 </div>
@@ -17,17 +17,26 @@
           <div class="container">
             <div class="row">
               <div class="col" style="text-align:center">
-                <a href="{% url 'novi' %}" style="padding-right:20px">Prijava za vakcinu</a>
+                <a id="link" href="{% url 'novi' %}" style="padding-right:20px">Prijava za vakcinu</a>
                 <button id="dugme_za_drugu_stranu" type="button" name="button">Lista vakcinisanih</button>
               </div>
             </div>
+            <br>
+            <div class="row">
+              <div class="col col-sm">
+                <img src="{% static '/images/COVID19-Mask_1.png' %}" class="img-fluid" alt="Responsive image" height="30%">
+              </div>
+            </div>
         </div>
-          {% block scripts %}
-          <script type="text/javascript">
-            document.getElementById("dugme_za_drugu_stranu").onclick = function () {
-              location.href = "{% url 'lista' %}";
-              };
-          </script>
-          {% endblock %}
+      {% endblock %}
 
+      
+
+      {% block scripts %}
+      <script src="https://kit.fontawesome.com/9541bd8c06.js" crossorigin="anonymous"></script>
+      <script type="text/javascript">
+        document.getElementById("dugme_za_drugu_stranu").onclick = function () {
+          location.href = "{% url 'lista' %}";
+          };
+      </script>
       {% endblock %}
