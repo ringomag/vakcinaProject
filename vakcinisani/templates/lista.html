@@ -5,9 +5,22 @@
   <br>
   <h3>Lista vakcinisanih građana:</h3>
   <br>
+
+{% if messages %}
+  {% for message in messages %}
+    <!-- ovde se moze izabrati nesto od ponudjenih django levela:error, success, info..i tako ga selektovati -->
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span class="vakcina_oboji sinofarm {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span></li>
+    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span></li>
     {% endfor %}
   </ul>
 </div>

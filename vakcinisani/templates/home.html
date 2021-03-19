@@ -7,36 +7,53 @@
     <div class="col-lg" style="text-align:center">
       <br>
       <h1>Dobro došli na početnu stranicu "Covid-19 Vaccine" <i class="fas fa-syringe"></i></h1>
+      <hr>
     </div>
   </div>
 </div>
 {% endblock %}
 
-      {% block links %}
-      <br>
-          <div class="container">
-            <div class="row">
-              <div class="col" style="text-align:center">
-                <a id="link" href="{% url 'novi' %}" style="padding-right:20px">Prijava za vakcinu</a>
-                <button id="dugme_za_drugu_stranu" type="button" name="button">Lista vakcinisanih</button>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col col-sm">
-                <img src="{% static '/images/COVID19-Mask_1.png' %}" class="img-fluid" alt="Responsive image" height="30%">
-              </div>
-            </div>
+{% block links %}
+<br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col" style="text-align:center">
+          <a id="link" href="{% url 'novi' %}" style="padding-right:20px">Prijava za vakcinu</a>
+          <button id="dugme_za_drugu_stranu" type="button" name="button">Lista vakcinisanih</button>
         </div>
-      {% endblock %}
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col col-sm text-center">
+          <img src="{% static '/images/COVID19-Mask_1.png' %}" class="img-fluid" alt="Responsive image" height="30%">
+        </div>
 
-      
+        <!-- <div class="col col-sm text-center">
+          <!-- <br>
+          <a href="https://covid19.rs/"><img src="{% static '/images/statistic.png' %}" class="img-fluid" alt="Responsive image"></a>
+        </div> -->
 
-      {% block scripts %}
-      <script src="https://kit.fontawesome.com/9541bd8c06.js" crossorigin="anonymous"></script>
-      <script type="text/javascript">
-        document.getElementById("dugme_za_drugu_stranu").onclick = function () {
-          location.href = "{% url 'lista' %}";
-          };
-      </script>
-      {% endblock %}
+        <div class="col col-sm text-end">
+          <br>
+          <hr>
+          <p style="font-weight:bold">Talk from a safe distance</p>
+          <p>Wear mask</p>
+          <p>Wash hands</p>
+          <p>Stay safe</p>
+        </div>
+
+      </div>
+  </div>
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="https://kit.fontawesome.com/9541bd8c06.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  document.getElementById("dugme_za_drugu_stranu").onclick = function () {
+    location.href = "{% url 'lista' %}";
+    };
+</script>
+{% endblock %}

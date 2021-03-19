@@ -2,16 +2,17 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import VakcinisanForm
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic import TemplateView
 from django.views import View
+from django.contrib import messages
 
+# Class Based View
 class MethodView(View):
     template_name = 'lista.html'
     form = VakcinisanForm
     def get(self, request, *args, **kwargs):
         # form = VakcinisanForm
         form = self.form(request.GET)
-        kreirani = Vakcinisan.objects.all()
+        kreirani = Vakcinisan.objects.all().order_by('-datum')
         return render(request, self.template_name, {'form':form, 'kreirani':kreirani})
 
     def post(self, request, *args, **kwargs):
@@ -19,9 +20,10 @@ class MethodView(View):
         form = self.form(request.POST)
         if form.is_valid():
             form.save()
+            # messages
+            messages.success(request, 'Uspešno ste se prijavili za vakicnaciju!')
             return redirect('lista')
         return render(request, self.template_name, {"form":form})
-
 
 
 # Create your views here.

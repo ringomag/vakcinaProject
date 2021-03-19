@@ -1,20 +1,27 @@
 body{
-  background-color: #cfd6e3;
+  background-color: #e8f1fc;
 }
+
 .sinofarm{
-  color:yellow;
+  color:#f7f05c;
   font-weight:bold;
 }
 #link:hover{
   font-weight:bold;
   color:#eb4034;
+  font-size: 16px;
 }
 #dugme_za_drugu_stranu:hover{
-  background-color: #4885cf;
+  background-color: #a9e9f5;
 }
 
 #absolute {
     position: absolute;
     left: 0 ; right: 0; bottom: 0;
-    height:[footer-height]
+    height:[footer-height];
+}
+p{
+  font-family:sans-serif;
+  font-family: 'Charmonman', cursive;
+  font-size: 19px;
 }
