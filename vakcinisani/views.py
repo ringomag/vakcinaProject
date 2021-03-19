@@ -5,12 +5,21 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import TemplateView
 from django.views import View
 
-class FirstMethodView(View):
-    lista = 'lista.html'
-    novi = 'novi_pacijent.html'
+class MethodView(View):
+    template_name = 'lista.html'
+    form = VakcinisanForm
     def get(self, request, *args, **kwargs):
+        form = VakcinisanForm
         kreirani = Vakcinisan.objects.all()
-        return render(request, self.lista, {'kreirani':kreirani})
+        return render(request, self.template_name, {'form':form, 'kreirani':kreirani})
+
+    def post(self, request, *args, **kwargs):
+        form = VakcinisanForm
+        form = self.form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista')
+        return render(request, self.template_name, {"form":form})
 
 
 
