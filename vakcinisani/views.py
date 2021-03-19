@@ -9,7 +9,8 @@ class MethodView(View):
     template_name = 'lista.html'
     form = VakcinisanForm
     def get(self, request, *args, **kwargs):
-        form = VakcinisanForm
+        # form = VakcinisanForm
+        form = self.form(request.GET)
         kreirani = Vakcinisan.objects.all()
         return render(request, self.template_name, {'form':form, 'kreirani':kreirani})
 
