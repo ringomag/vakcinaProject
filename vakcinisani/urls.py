@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete/<int:id>', views.delete, name='delete'),
     # path('lista/', views.lista, name='lista'),
     path('novi_pacijent/', MethodView.as_view(template_name='novi_pacijent.html'), name='novi'),
+    path('vakcinisan/<str:pk>', views.vakcinisan, name='vakcinisan'),
 ]

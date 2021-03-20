@@ -25,3 +25,10 @@ p{
   font-family: 'Charmonman', cursive;
   font-size: 19px;
 }
+
+.detalji_span{
+  font-family:sans-serif;
+  font-size: 19px;
+  color: green;
+  font-style: oblique;
+}

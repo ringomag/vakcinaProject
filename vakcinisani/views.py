@@ -25,8 +25,14 @@ class MethodView(View):
             return redirect('lista')
         return render(request, self.template_name, {"form":form})
 
+#detalji
+def vakcinisan(request, pk):
+    vakcinisan = Vakcinisan.objects.get(id=pk)
+    context = {'vakcinisan':vakcinisan}
+    return render(request, 'vakcinisan.html', context)
 
-# Create your views here.
+
+
 def home(request):
     return render(request, 'home.html', {})
 

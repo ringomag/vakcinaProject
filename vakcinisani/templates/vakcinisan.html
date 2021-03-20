@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+  <br>
+  <h2>Detalji:</h2>
+  <br>
+  <ul class="list-group">
+    <li class="list-group-item"><span class="detalji_span">Ime:</span> {{vakcinisan.ime}}</li>
+    <li class="list-group-item"><span class="detalji_span">Prezime:</span> {{vakcinisan.prezime}}</li>
+    <li class="list-group-item"><span class="detalji_span">Maticni broj:</span> {{vakcinisan.jmbg}}</li>
+    <li class="list-group-item"><span class="detalji_span">Vakcina:</span> {{vakcinisan.vakcina}}</li>
+  </ul>
+</div>
+
+{% endblock %}
