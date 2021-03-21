@@ -11,7 +11,7 @@
     <!-- ovde se moze izabrati nesto od ponudjenih django levela:error, success, info..i tako ga selektovati -->
     {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
       <div class="alert alert-success">
-        {{ message }}
+        {{ message }} <i class="fas fa-check-circle" style="color:green"></i>
       </div>
     {% endif %}
   {% endfor %}
@@ -34,7 +34,8 @@
 {% endblock %}
 
 {% block scripts %}
-{{block.super}}
+<!-- {{block.super}} -->
+<script src="https://kit.fontawesome.com/9541bd8c06.js" crossorigin="anonymous"></script>
 <script>
   // var astra = document.getElementById('vakcina_oboji');
   // var astra_vrednost = astra.value;
