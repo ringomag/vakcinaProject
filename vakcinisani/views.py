@@ -25,12 +25,44 @@ class MethodView(View):
             return redirect('lista')
         return render(request, self.template_name, {"form":form})
 
+#class based kad ima pk
+# class EditVakcinisanView(View):
+#     template_name = 'vakcinisan.html'
+#     form = VakcinisanForm
+#     def get(self, request, pk, *args, **kwargs):
+#         form = self.form(request.GET)
+#         vakcinisan = Vakcinisan.objects.get(id=pk)
+#         context = {'vakcinisan':vakcinisan, 'form':form}
+#         return render(request, self.template_name, context)
+#
+#     def post(self, request, pk, *args, **kwargs):
+#         vakcinisan = Vakcinisan.objects.get(id=pk)
+#         form = self.form(instance=vakcinisan)
+#         form = self.form(request.POST, instance=vakcinisan)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('lista')
+#         return render(request, self.template_name, {"form":form, 'vakcinisan':vakcinisan})
+
+
+
 #detalji
 def vakcinisan(request, pk):
     vakcinisan = Vakcinisan.objects.get(id=pk)
     context = {'vakcinisan':vakcinisan}
     return render(request, 'vakcinisan.html', context)
 
+#edit
+def edit(request, pk):
+    vakcinisan = Vakcinisan.objects.get(id=pk)
+    form = VakcinisanForm(instance=vakcinisan)
+    if request.method=="POST":
+        form = VakcinisanForm(request.POST, instance=vakcinisan)
+        if form.is_valid():
+            form.save()
+            return redirect('lista')
+    context = {'vakcinisan':vakcinisan, 'form':form}
+    return render(request, 'edit.html', context)
 
 
 def home(request):

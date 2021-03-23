@@ -1,7 +1,12 @@
+import uuid
 from django.db import models
 from django import forms
 
+
 class Vakcinisan(models.Model):
+    #pokusao sa id uuid, ali onda mi se sve pojebe, ne mogu da pristupim ni bazi preko admina
+    #mozda zato sto sam vec imao dosta kreiranih i dosta izmena u bazi...
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ime = models.CharField(max_length=200)
     prezime = models.CharField(max_length=200)
     vrste_vakcina = (

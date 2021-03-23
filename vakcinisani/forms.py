@@ -5,4 +5,10 @@ from django import forms
 class VakcinisanForm(ModelForm):
     class Meta:
         model = Vakcinisan
-        fields = '__all__'
+        fields = [
+            'ime',
+            'prezime',
+            'jmbg',
+            'vakcina',
+            'alergija',
+        ]

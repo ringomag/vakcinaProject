@@ -20,7 +20,11 @@
 
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------ <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span><a class="float-end" href="{% url 'vakcinisan' i.id %}">Detalji</a></li>
+    <li class="list-group-item">{{i.ime}} {{i.prezime}} ------
+       <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span>
+       <a class="btn btn-warning float-end btn-sm ms-1" href="{% url 'edit' i.id %}">Uredi</a>
+       <a class="btn btn-primary float-end btn-sm" href="{% url 'vakcinisan' i.id %}">Detalji</a>
+    </li>
     {% endfor %}
   </ul>
 </div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Izvršite izmene i sačuvajte</h2>
+  <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
+    {% csrf_token %}
+    <ul class="list-group">
+      <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
+      <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
+      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
+    </ul>
+    <input type="submit" name="Sacuvaj" value="Sacuvaj">
+    <a class="btn btn-secondary btn-sm ms-1" href="{% url 'lista' %}">Cancel</a>
+    </form>
+
+</div>
+
+{% endblock %}
