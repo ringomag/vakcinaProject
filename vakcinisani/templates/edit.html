@@ -6,8 +6,10 @@
   <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
     {% csrf_token %}
     <ul class="list-group">
-      <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
-      <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
+      <li class="list-group-item">Ime: {{form.ime}}</li>
+      <li class="list-group-item">Prezime: {{form.prezime}}</li>
+      <li class="list-group-item">Maticni broj: {{form.jmbg}}</li>
+      <li class="list-group-item">Vrsta vackcine: {{form.vakcina}}</li>
       <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
     </ul>
     <input type="submit" name="Sacuvaj" value="Sacuvaj">

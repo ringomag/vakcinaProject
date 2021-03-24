@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
   <br>
-  <h3>Popunite formu i stisnite dugme "Dodaj"</h3> <hr>
+  <h3>Popunite formu i stisnite dugme "Dodaj"</h3> 
+  <hr>
   <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
     {% csrf_token %}
     <ul class="list-group">
@@ -11,10 +13,12 @@
       <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
       <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
     </ul>
+
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="dodaj_dugme">
   Dodaj
-</button>
+</button> <br>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!-- odavde pocinje modal, koji uyzima javascrpit -->

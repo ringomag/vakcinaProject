@@ -26,66 +26,64 @@ class MethodView(View):
         return render(request, self.template_name, {"form":form})
 
 #class based kad ima pk
-# class EditVakcinisanView(View):
-#     template_name = 'vakcinisan.html'
-#     form = VakcinisanForm
-#     def get(self, request, pk, *args, **kwargs):
-#         form = self.form(request.GET)
-#         vakcinisan = Vakcinisan.objects.get(id=pk)
-#         context = {'vakcinisan':vakcinisan, 'form':form}
-#         return render(request, self.template_name, context)
-#
-#     def post(self, request, pk, *args, **kwargs):
-#         vakcinisan = Vakcinisan.objects.get(id=pk)
-#         form = self.form(instance=vakcinisan)
-#         form = self.form(request.POST, instance=vakcinisan)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('lista')
-#         return render(request, self.template_name, {"form":form, 'vakcinisan':vakcinisan})
+class EditVakcinisanView(View):
+    template_name = 'vakcinisan.html'
+    form = VakcinisanForm
+    def get(self, request, pk, *args, **kwargs):
+        vakcinisan = Vakcinisan.objects.get(id=pk)
+        form = VakcinisanForm(instance=vakcinisan)
+        context = {'vakcinisan':vakcinisan, 'form':form}
+        return render(request, self.template_name, context)
 
-
-
-#detalji
-def vakcinisan(request, pk):
-    vakcinisan = Vakcinisan.objects.get(id=pk)
-    context = {'vakcinisan':vakcinisan}
-    return render(request, 'vakcinisan.html', context)
-
-#edit
-def edit(request, pk):
-    vakcinisan = Vakcinisan.objects.get(id=pk)
-    form = VakcinisanForm(instance=vakcinisan)
-    if request.method=="POST":
-        form = VakcinisanForm(request.POST, instance=vakcinisan)
+    def post(self, request, pk, *args, **kwargs):
+        vakcinisan = Vakcinisan.objects.get(id=pk)
+        form = VakcinisanForm(instance=vakcinisan)
+        form = self.form(request.POST, instance=vakcinisan)
         if form.is_valid():
             form.save()
             return redirect('lista')
-    context = {'vakcinisan':vakcinisan, 'form':form}
-    return render(request, 'edit.html', context)
-
+        return render(request, self.template_name, {"form":form})
 
 def home(request):
     return render(request, 'home.html', {})
+    
+# #detalji
+# def vakcinisan(request, pk):
+#     vakcinisan = Vakcinisan.objects.get(id=pk)
+#     context = {'vakcinisan':vakcinisan}
+#     return render(request, 'vakcinisan.html', context)
+#
+# #edit
+# def edit(request, pk):
+#     vakcinisan = Vakcinisan.objects.get(id=pk)
+#     form = VakcinisanForm(instance=vakcinisan)
+#     if request.method=="POST":
+#         form = VakcinisanForm(request.POST, instance=vakcinisan)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('lista')
+#     context = {'vakcinisan':vakcinisan, 'form':form}
+#     return render(request, 'edit.html', context)
 
-def index(request):
-    kreirani = Vakcinisan.objects.all()
-    form = VakcinisanForm
 
-    alergija = Vakcinisan.alergija
-    if request.method == "POST":
-        form = VakcinisanForm(request.POST)
-        # import pdb
-        # pdb.set_trace() #ovo moze da se ubaci, kao debuger, pre cuvanja u bazi
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    context = {'form':form, 'kreirani':kreirani}
-    return render(request, 'index.html', context)
-
-def delete(request, id):
-    Vakcinisan.objects.get(id=id).delete()
-    return HttpResponseRedirect('/')
+# def index(request):
+#     kreirani = Vakcinisan.objects.all()
+#     form = VakcinisanForm
+#
+#     alergija = Vakcinisan.alergija
+#     if request.method == "POST":
+#         form = VakcinisanForm(request.POST)
+#         # import pdb
+#         # pdb.set_trace() #ovo moze da se ubaci, kao debuger, pre cuvanja u bazi
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+#     context = {'form':form, 'kreirani':kreirani}
+#     return render(request, 'index.html', context)
+#
+# def delete(request, id):
+#     Vakcinisan.objects.get(id=id).delete()
+#     return HttpResponseRedirect('/')
 
 
 
@@ -95,11 +93,11 @@ def delete(request, id):
 #     return render(request, 'lista.html', {'kreirani':kreirani})
 
 # ova funkcija je za novog gradjanina koji se prijavljuje za vakcinu
-def novi(request):
-    form = VakcinisanForm
-    if request.method == 'POST':
-        form = VakcinisanForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/lista/')
-    return render(request, 'novi_pacijent.html', {'form':form})
+# def novi(request):
+#     form = VakcinisanForm
+#     if request.method == 'POST':
+#         form = VakcinisanForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/lista/')
+#     return render(request, 'novi_pacijent.html', {'form':form})

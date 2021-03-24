@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from .models import Vakcinisan
 from django import forms
 
+
 class VakcinisanForm(ModelForm):
     class Meta:
         model = Vakcinisan
@@ -12,3 +13,4 @@ class VakcinisanForm(ModelForm):
             'vakcina',
             'alergija',
         ]
+    
