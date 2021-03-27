@@ -4,14 +4,17 @@
 
 <div class="container">
   <br>
-  <h3>Popunite formu i stisnite dugme "Dodaj"</h3> 
+  <h3>Popunite formu i stisnite dugme "Dodaj"</h3>
   <hr>
+  {{ form.non_field_errors }}
   <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
     {% csrf_token %}
+
     <ul class="list-group">
       <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
       <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
-      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
+      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li><br>
+      <span class="alert alert-danger">{{form.jmbg.errors}}</span>
     </ul>
 
     <!-- Button trigger modal -->

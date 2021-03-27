@@ -16,7 +16,7 @@ class Vakcinisan(models.Model):
         ("Sinofarm","Sinofarm"),
         ("Moderna","Moderna"),
     )
-    jmbg = models.IntegerField()
+    jmbg = models.CharField(max_length=13, blank=True)
     vakcina = models.CharField(max_length=100, choices=vrste_vakcina)
     alergija = models.BooleanField(default=False)
     datum = models.DateTimeField(auto_now_add=True, null=True)
