@@ -14,7 +14,9 @@
       <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
       <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
       <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li><br>
+      {% if form.jmbg.errors %}
       <span class="alert alert-danger">{{form.jmbg.errors}}</span>
+      {% endif %}
     </ul>
 
     <!-- Button trigger modal -->

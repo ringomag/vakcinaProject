@@ -6,7 +6,9 @@
   <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
     {% csrf_token %}
     <ul class="list-group">
+      {% if form.jmbg.errors %}
       <span class="alert alert-danger">{{form.jmbg.errors}}</span>
+      {% endif %}
       <li class="list-group-item">Ime: {{form.ime}}</li>
       <li class="list-group-item">Prezime: {{form.prezime}}</li>
       <li class="list-group-item">Maticni broj: {{form.jmbg}}</li>
