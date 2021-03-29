@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -6,47 +7,91 @@
   <br>
   <h3>Popunite formu i stisnite dugme "Dodaj"</h3>
   <hr>
-  {{ form.non_field_errors }}
-  <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
-    {% csrf_token %}
+  <div class="row">
 
-    <ul class="list-group">
-      <li class="list-group-item">Ime: {{form.ime}} Prezime: {{form.prezime}}</li>
-      <li class="list-group-item">Maticni broj: {{form.jmbg}} Vrsta vackcine: {{form.vakcina}}</li>
-      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li><br>
-      {% if form.jmbg.errors %}
-      <span class="alert alert-danger">{{form.jmbg.errors}}</span>
-      {% endif %}
-    </ul>
+    <div class="col-sm">
+      <form action="" method="POST">
+        {% csrf_token %}
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="dodaj_dugme">
-  Dodaj
-</button> <br>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">{{ form.non_field_errors }}</div> <!--ovo se koristi za poziv clean!-->
+        {% endif %}
 
+          <div class="mb-3">
+            <label for="{{ form.ime.id_for_label }}" class="form-label">Ime: </label>
+            {{ form.ime }}
+          </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!-- odavde pocinje modal, koji uyzima javascrpit -->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Upit</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Da li ste sigurni da zelite da primite vakcinu <span id="vrednost_vakcine"> </span>?  <!--kako ovde izabrati selektovanu vakcinu jebem mu sve--!>
-        <br>
-          u polju ime, ima ukupno <span id="broj_karaktera"></span> karaktera.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input class="btn btn-success" type="submit" name="" value="Da" style="margin-left:5px;">
+          <div class="mb-3">
+            <label for="{{ form.prezime.id_for_label }}" class="form-label">Prezime: </label>
+            {{ form.prezime }}
+          </div>
+
+          <div class="mb-3">
+            {% if form.jmbg.errors %}
+              <div class="alert alert-danger">{{form.jmbg.errors}}</div>
+            {% endif %}
+            <label for="{{ form.jmbg.id_for_label }}" class="form-label">Maticni broj: </label>
+            {{ form.jmbg }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Email: </label>
+            {{ form.email_1 }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Email potvrdi: </label>
+            {{ form.email_2 }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.vakcina.id_for_label }}" class="form-label">Vrsta vackcine: </label>
+            {{ form.vakcina }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.alergija.id_for_label }}" class="form-label">Da li ste alergicni?(Cekirajte polje ako jeste) </label>
+            {{ form.alergija }}
+          </div>
+
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="dodaj_dugme">
+      Dodaj
+    </button> <br>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!-- odavde pocinje modal, koji uyzima javascrpit -->
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Upit</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Da li ste sigurni da zelite da primite vakcinu <span id="vrednost_vakcine"> </span>?  <!--kako ovde izabrati selektovanu vakcinu jebem mu sve--!>
+            <br>
+              u polju ime, ima ukupno <span id="broj_karaktera"></span> karaktera.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input class="btn btn-success" type="submit" name="" value="Da" style="margin-left:5px;">
+          </div>
+        </div>
       </div>
     </div>
+      </form>
+    </div>
+
+    <div class="col-sm float-end"">
+      <br><br>
+      <img src="{% static '/images/forma_slika.jpg' %}" class="img-fluid ms-5" alt="Responsive image" height="30%" >
+    </div>
+
   </div>
-</div>
-  </form>
+
   <br>
+
 
 {% endblock %}
 {% block scripts %}

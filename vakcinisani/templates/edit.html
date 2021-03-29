@@ -1,23 +1,72 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container">
+  <br>
   <h2>Izvršite izmene i sačuvajte</h2>
-  <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="POST">
-    {% csrf_token %}
-    <ul class="list-group">
-      {% if form.jmbg.errors %}
-      <span class="alert alert-danger">{{form.jmbg.errors}}</span>
-      {% endif %}
-      <li class="list-group-item">Ime: {{form.ime}}</li>
-      <li class="list-group-item">Prezime: {{form.prezime}}</li>
-      <li class="list-group-item">Maticni broj: {{form.jmbg}}</li>
-      <li class="list-group-item">Vrsta vackcine: {{form.vakcina}}</li>
-      <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
-    </ul>
-    <input id="dugme_disabled" type="submit" name="Sacuvaj" value="Sacuvaj">
-    <a class="btn btn-secondary btn-sm ms-1" href="{% url 'lista' %}">Cancel</a>
-    </form>
+  <hr>
+  <div class="row">
+    <div class="col-sm">
+      <form method="POST" class="col col-sm">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+    <div class="col col-sm">
+
+      <label for="{{ form.ime.id_for_label }}" class="form-label">Ime: </label>
+      {{ form.ime }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.prezime.id_for_label }}">Prezime: </label>
+      {{ form.prezime }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.jmbg.id_for_label }}">Maticni broj: </label>
+      {{ form.jmbg }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.email.id_for_label }}">Email: </label>
+      {{ form.email_1 }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.email.id_for_label }}">Email potvrdi: </label>
+      {{ form.email_2 }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.vakcina.id_for_label }}">Vrsta vackcine: </label>
+      {{ form.vakcina }}
+    </div>
+    <div class="mb-3">
+
+      <label for="{{ form.alergija.id_for_label }}">Da li ste alergicni?(Cekirajte polje ako jeste) </label>
+      {{ form.alergija }}
+    </div>
+    <input id="dugme_disabled" type="submit" name="Sacuvaj" value="Sacuvaj" class="btn btn-success">
+    <a class="btn btn-secondary" href="{% url 'lista' %}">Cancel</a>
+        <!-- <ul class="list-group">
+          <!-- {% if form.jmbg.errors %}
+          <span class="alert alert-danger">{{form.jmbg.errors}}</span>
+          {% endif %} -->
+        <!--  <li class="list-group-item">Ime: {{form.ime}}</li>
+          <li class="list-group-item">Prezime: {{form.prezime}}</li>
+          <li class="list-group-item">Maticni broj: {{form.jmbg}}</li>
+          <li class="list-group-item">Email: {{form.email}}</li>
+          <li class="list-group-item">Vrsta vackcine: {{form.vakcina}}</li>
+          <li class="list-group-item">Da li ste alergicni?(Cekirajte polje ako jeste) {{form.alergija}}</li>
+        </ul> -->
+        </form>
+    </div>
+    <div class="col-sm">
+      <br><br>
+      <img src="{% static '/images/edit_form.png' %}" class="img-fluid ms-5" alt="Responsive image" height="30%" >
+    </div>
+  </div>
+
 
 
 </div>
