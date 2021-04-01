@@ -30,7 +30,8 @@ class VakcinisanForm(ModelForm):
         data = self.cleaned_data['jmbg']
         for char in data:
             if not char.isdigit():
-                raise forms.ValidationError("Neispravan JMBG. Maticni broj se sastoji samo od cifara!")
+                self.add_error('jmbg', error="Neispravan JMBG. Maticni broj se sastoji samo od cifara!")
+                #raise forms.ValidationError('Neispravan JMBG')
             return data
 
     def clean(self):
@@ -42,6 +43,18 @@ class VakcinisanForm(ModelForm):
                 # Only do something if both fields are valid so far.
                 if email_1 != email_2:
                     print("nisu iste adrese")
-                    raise forms.ValidationError(
-                        "Email adrese nisu iste"
-                    )
+                    raise forms.ValidationError("Email adrese nisu iste")
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+class EmailInput(forms.EmailInput):
+    input_type = 'email'
+
+class ObavestiForm(forms.Form):
+    datum = forms.DateField(widget=DateInput(attrs={'class':'form-control'}))
+    mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
+    vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))

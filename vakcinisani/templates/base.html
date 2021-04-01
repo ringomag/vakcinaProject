@@ -12,11 +12,23 @@
      <title>Vakcinisani</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">Vakcinisani protiv Covid-19</a>
+
+
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'obavesti' %}">Obavesti korisnika</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Vakcinisani protiv Covid-19</a>
       </div>
-    </nav>
+    </nav> -->
 
         {% block heading %}
         {% endblock %}
@@ -33,7 +45,7 @@
 
         {% block footer %}
         <footer>
-          <div id="absolute" class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2021 Copyright: Vaccine</div>
         </footer>
         {% endblock %}

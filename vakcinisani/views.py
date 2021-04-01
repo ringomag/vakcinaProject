@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import VakcinisanForm
+from .forms import VakcinisanForm, ObavestiForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import View
 from django.contrib import messages
@@ -46,7 +46,11 @@ class EditVakcinisanView(View):
 
 def home(request):
     return render(request, 'home.html', {})
-    
+
+def obavesti(request):
+    form = ObavestiForm
+    return render(request, 'obavesti_korisnika.html', {'form':form})
+
 # #detalji
 # def vakcinisan(request, pk):
 #     vakcinisan = Vakcinisan.objects.get(id=pk)

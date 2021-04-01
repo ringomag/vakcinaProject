@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block list %}
 <div class="container">
   <br>
   <h3>Lista vakcinisanih građana:</h3>
   <br>
+
 
 {% if messages %}
   {% for message in messages %}
@@ -20,7 +22,7 @@
 
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item">{{i.ime}} {{i.prezime}} <i class="fas fa-long-arrow-alt-right"></i>
+    <li class="list-group-item"><span class="za_tippy">{{i.ime}} {{i.prezime}}</span> <i class="fas fa-long-arrow-alt-right"></i>
        <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span>
        <a class="btn btn-warning float-end btn-sm ms-1" href="{% url 'edit' i.id %}">Uredi</a>
        <a class="btn btn-primary float-end btn-sm" href="{% url 'vakcinisan' i.id %}">Detalji</a>
@@ -40,6 +42,10 @@
 {% block scripts %}
 <!-- {{block.super}} -->
 <script src="https://kit.fontawesome.com/9541bd8c06.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="{% static '/js/main.js' %}"> </script>
+
 <script>
   // var astra = document.getElementById('vakcina_oboji');
   // var astra_vrednost = astra.value;

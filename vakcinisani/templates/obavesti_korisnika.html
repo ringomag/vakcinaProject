@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<h2 class="ms-3"> Obavesti korisnika</h2><hr>
+<div class="container">
+
+  <div class="row">
+    <div class="col-4">
+      <form method="POST" class="form-control">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+          <label for="{{ form.email.id_for_label }}" class="form-label">Email: </label>
+          {{ form.mail }}
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.datum.id_for_label }}" class="form-label">Datum: </label>
+          {{ form.datum }}
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.vreme.id_for_label }}" class="form-label">Vreme: </label>
+          {{ form.vreme }}
+        </div>
+        <input type="submit" value="Posalji" class="btn btn-primary form-control">
+    </form>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer>
+  <div id="absolute" class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  © 2021 Copyright: Vaccine</div>
+</footer>
+{% endblock %}

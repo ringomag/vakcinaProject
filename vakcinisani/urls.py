@@ -7,6 +7,7 @@ from .views import EditVakcinisanView
 urlpatterns = [
     #path('', views.index ,name='index'),
     path('lista/', MethodView.as_view(), name='lista'), #ovde je get metoda za stranu "lista"
+    path('obavesti_korisnika/', views.obavesti, name='obavesti'),
     path('', views.home, name='home'),
     # path('delete/<int:id>', views.delete, name='delete'),
     # path('lista/', views.lista, name='lista'),
