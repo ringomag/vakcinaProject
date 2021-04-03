@@ -22,10 +22,10 @@
 
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item"><span class="za_tippy">{{i.ime}} {{i.prezime}}</span> <i class="fas fa-long-arrow-alt-right"></i>
+    <li class="list-group-item"><span id="za_tippy-{{i.id}}"class="za_tippy">{{i.ime}} {{i.prezime}}</span> <i class="fas fa-long-arrow-alt-right"></i>
        <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span>
-       <a class="btn btn-warning float-end btn-sm ms-1" href="{% url 'edit' i.id %}">Uredi</a>
-       <a class="btn btn-primary float-end btn-sm" href="{% url 'vakcinisan' i.id %}">Detalji</a>
+       <a class="btn btn-warning float-end btn-sm ms-1 btn-tippy-2" data-template="za_tippy-{{i.id}}" href="{% url 'edit' i.id %}">Uredi</a>
+       <a class="btn btn-primary float-end btn-sm btn-tippy" data-template="za_tippy-{{i.id}}" href="{% url 'vakcinisan' i.id %}">Detalji</a>
     </li>
     {% endfor %}
   </ul>
