@@ -4,6 +4,7 @@ from .forms import VakcinisanForm, ObavestiForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import View
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # Class Based View
 class MethodView(View):
@@ -47,9 +48,26 @@ class EditVakcinisanView(View):
 def home(request):
     return render(request, 'home.html', {})
 
-def obavesti(request):
+class ObavestiView(View):
     form = ObavestiForm
-    return render(request, 'obavesti_korisnika.html', {'form':form})
+    def get(self, request, *args, **kwargs):
+        form = ObavestiForm
+        return render(request, 'obavesti_korisnika.html', {'form':form})
+    def post(self, request, *args, **kwargs):
+        form = ObavestiForm
+        message_name = request.POST['ime']
+        message_content = request.POST['datum']
+        message_from = request.POST['mail']
+
+        #send_mail
+        send_mail(
+        message_name, #subject
+        message_content, #message
+        message_from,#from email
+        ['optimuskrajm@gmail.com'],#to email
+        )
+
+        return render(request, 'obavesti_korisnika.html', {'form':form, 'message_name':message_name})
 
 # #detalji
 # def vakcinisan(request, pk):

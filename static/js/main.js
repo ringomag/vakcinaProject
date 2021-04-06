@@ -22,7 +22,11 @@
 // To ti je u stvari problem sa kojim si se ti susreo
 // Posto ti je u javasccriptu sve funkcija, umesto da pises template.innerHTML, ti napravis funkciju koja ce po id-ju da nadje template i vrati njegov innerHTML.
 // Namerno sam ti ostavio console.log ispod da vidis sta je po dukmentaciji ulaz u funkciju za vracanje contenta(element na koga si prevukao misa)
+
+
+
   tippy('.btn-tippy', {
+
     content(reference) {
       console.log('reference', reference);
       const id = reference.getAttribute('data-template');
@@ -30,6 +34,9 @@
       return template.innerHTML;
     },
     allowHTML: true,
+    placement: 'left',
+    theme: 'blue',
+    animation: 'perspective',
   });
 
 // drugi nacin
@@ -39,14 +46,13 @@
 // Onda u for petlji prolazimo kroz te elemente i za svaki element nadjemo pripadajuci template po id-ju koji smo izvukli iz data-template.
 // I posto imamo zaseban element i zaseban template inicijalizujemo tippy samo za taaj par.
 // Ovo resenje je malo manje optimalno zbog for petlje ali je i vise nego legitimno i nece napraviti nikakvu razliku u perforamansama.
-var elements = document.getElementsByClassName('btn-tippy-2');
-for (i = 0; i < elements.length; i++) {
-  let element = elements[i];
-  let id = element.getAttribute('data-template');
-  let template = document.getElementById(id);
-  tippy(element, {
-    content: template.innerHTML, 
-    allowHTML: true,
-  });
-}
-
+// var elements = document.getElementsByClassName('btn-tippy-2');
+// for (i = 0; i < elements.length; i++) {
+//   let element = elements[i];
+//   let id = element.getAttribute('data-template');
+//   let template = document.getElementById(id);
+//   tippy(element, {
+//     content: template.innerHTML,
+//     allowHTML: true,
+//   });
+// }

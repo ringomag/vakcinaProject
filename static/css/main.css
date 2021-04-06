@@ -1,3 +1,5 @@
+
+
 body{
   background-color: #e8f1fc;
 }
@@ -31,4 +33,14 @@ p{
   font-size: 19px;
   color: green;
   font-style: oblique;
+}
+
+.tippy-box[data-theme~='blue'] {
+  background-color: #bbeddc;
+  color: #070b12;
+  font-style: oblique;
+}
+
+.tippy-box[data-theme~='blue'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: blue;
 }
