@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 
+
 class VakcinisanForm(ModelForm):
     class Meta:
         model = Vakcinisan
@@ -46,17 +47,17 @@ class VakcinisanForm(ModelForm):
                     raise forms.ValidationError("Email adrese nisu iste")
 
 class DateInput(forms.DateInput):
-    input_type = 'date'
+    input_type = 'datetime-local'
 
-class TimeInput(forms.TimeInput):
-    input_type = 'time'
+# class TimeInput(forms.TimeInput):
+#     input_type = 'time'
 
 class EmailInput(forms.EmailInput):
     input_type = 'email'
 
 class ObavestiForm(forms.Form):
-    datum = forms.DateField(widget=DateInput(attrs={'class':'form-control'}))
+    datum = forms.DateField(input_formats=['%d/%m/%Y'], widget=DateInput(attrs={'class':'form-control', 'input_formats':'%d-%m-%Y'}))
     mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
-    vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
+    # vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+    poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':3}))
