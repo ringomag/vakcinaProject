@@ -49,6 +49,7 @@ class VakcinisanForm(ModelForm):
 class DateInput(forms.DateInput):
     input_type = 'datetime-local'
 
+
 # class TimeInput(forms.TimeInput):
 #     input_type = 'time'
 
@@ -56,7 +57,7 @@ class EmailInput(forms.EmailInput):
     input_type = 'email'
 
 class ObavestiForm(forms.Form):
-    datum = forms.DateField(input_formats=['%d/%m/%Y'], widget=DateInput(attrs={'class':'form-control', 'input_formats':'%d-%m-%Y'}))
+    datum = forms.DateField(widget=DateInput(attrs={'class':'form-control', 'placeholder':"mm/dd/yyy,HH:mm"}))
     mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
     # vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))

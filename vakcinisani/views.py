@@ -56,15 +56,16 @@ class ObavestiView(View):
     def post(self, request, *args, **kwargs):
         form = ObavestiForm
         message_name = request.POST['ime']
-        message_content = request.POST['datum']
+        message_content = request.POST['datum']+request.POST['poruka']
         message_from = request.POST['mail']
 
         #send_mail
         send_mail(
         message_name, #subject
         message_content, #message
-        message_from,#from email
-        ['optimuskrajm@gmail.com'],#to email
+        message_from, #from email
+        ['optimuskrajm@gmail.com'], #to email
+        fail_silently=False,
         )
 
         return render(request, 'obavesti_korisnika.html', {'form':form, 'message_name':message_name})

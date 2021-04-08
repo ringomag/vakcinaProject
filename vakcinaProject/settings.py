@@ -1,6 +1,17 @@
 
 from pathlib import Path
 import os
+#ubacivanje envirion
+# import environ
+# env = environ.Env(
+#     # set casting, default value
+#     DEBUG=(bool, False)
+# )
+# # reading .env file
+# environ.Env.read_env()
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@o_-6g65c@09^pd@k@bsf74i-bbm&+=bf@!@h3avggs2%s721l'
+SECRET_KEY='@o_-6g65c@09^pd@k@bsf74i-bbm&+=bf@!@h3avggs2%s721l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -117,6 +128,7 @@ STATICFILES_DIRS = [
 
 
 #email settings
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '1025'
 EMAIL_HOST_USER = ''
