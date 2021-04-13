@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import VakcinisanForm, ObavestiForm
+from .forms import VakcinisanForm, ObavestiForm, BolestForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import View
 from django.contrib import messages
@@ -10,11 +10,13 @@ from django.core.mail import send_mail
 class MethodView(View):
     template_name = 'lista.html'
     form = VakcinisanForm
+    bolest = BolestForm
     def get(self, request, *args, **kwargs):
         # form = VakcinisanForm
         form = self.form(request.GET)
+        bolest = self.bolest(request.GET)
         kreirani = Vakcinisan.objects.all().order_by('-datum')
-        return render(request, self.template_name, {'form':form, 'kreirani':kreirani})
+        return render(request, self.template_name, {'form':form, 'kreirani':kreirani, 'bolest':bolest})
 
     def post(self, request, *args, **kwargs):
         form = VakcinisanForm
@@ -22,7 +24,7 @@ class MethodView(View):
         if form.is_valid():
             form.save()
             # messages
-            messages.success(request, 'Uspešno ste se prijavili za vakicnaciju!')
+            messages.success(request, 'Uspešno ste se prijavili za vakcinaciju!')
             return redirect('lista')
         return render(request, self.template_name, {"form":form})
 
@@ -55,20 +57,28 @@ class ObavestiView(View):
         return render(request, 'obavesti_korisnika.html', {'form':form})
     def post(self, request, *args, **kwargs):
         form = ObavestiForm
-        message_name = request.POST['ime']
-        message_content = request.POST['datum']+request.POST['poruka']
-        message_from = request.POST['mail']
+        form = ObavestiForm(request.POST)
+        if form.is_valid():
+            message_name = form.cleaned_data['ime']
+            message_content = "datum: " + str(form.cleaned_data['datum']) + " vreme: " + str(form.cleaned_data['vreme']) + " poruka: " + form.cleaned_data['poruka']
+            message_from = form.cleaned_data['mail']
+            print('dobro je')
 
-        #send_mail
-        send_mail(
-        message_name, #subject
-        message_content, #message
-        message_from, #from email
-        ['optimuskrajm@gmail.com'], #to email
-        fail_silently=False,
-        )
+            # send_mail
+            send_mail(
+            message_name, #subject
+            message_content, #message
+            message_from, #from email
+            ['optimuskrajm@gmail.com'], #to email
+            fail_silently=False,
+            )
+            return redirect('obavesti')
 
         return render(request, 'obavesti_korisnika.html', {'form':form, 'message_name':message_name})
+
+def bolest(request):
+    bolest = BolestForm
+    return render(request, 'lista.html', {'bolest':bolest})
 
 # #detalji
 # def vakcinisan(request, pk):

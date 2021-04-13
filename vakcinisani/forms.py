@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Vakcinisan
+from .models import Vakcinisan, Bolest
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -47,18 +47,32 @@ class VakcinisanForm(ModelForm):
                     raise forms.ValidationError("Email adrese nisu iste")
 
 class DateInput(forms.DateInput):
-    input_type = 'datetime-local'
+    input_type = 'date'
 
-
-# class TimeInput(forms.TimeInput):
-#     input_type = 'time'
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
 
 class EmailInput(forms.EmailInput):
     input_type = 'email'
 
 class ObavestiForm(forms.Form):
-    datum = forms.DateField(widget=DateInput(attrs={'class':'form-control', 'placeholder':"mm/dd/yyy,HH:mm"}))
+    datum = forms.DateField(widget=DateInput(attrs={'class':'form-control'}))
     mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
-    # vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
+    vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':3}))
+
+class BolestForm(ModelForm):
+    class Meta:
+        model = Bolest
+        fields = [
+            'ime_bolesti',
+            'datum_dijagnostike',
+            'vakcinisani_id',
+        ]
+
+        widgets ={
+            'ime_bolesti':forms.TextInput(attrs={'class':'form-control'}),
+            'datum_dijagnostike':forms.DateTimeInput(attrs={'class':'form-control'}),
+            'vakcinisani_id': forms.TextInput(attrs={'class':'form-control'})
+        }

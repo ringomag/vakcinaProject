@@ -8,6 +8,7 @@
   <br>
 
 
+
 {% if messages %}
   {% for message in messages %}
     <!-- ovde se moze izabrati nesto od ponudjenih django levela:error, success, info..i tako ga selektovati -->
@@ -20,12 +21,45 @@
 {% endif %}
 
 
+<!-- The Modal -->
+{% for i in kreirani %}
+<div class="modal myModal">
+<!-- Modal content -->
+<div class="modal-content">
+  <span class="close float-end">&times;</span>
+    <h5>Upisite Vasu bolest</h5>
+    <form class="form-control" method="POST">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="mb-2">
+        <label for="{{ bolest.ime_bolesti.id_for_label }}" class="form-label">Ime bolesti: </label>
+        {{ bolest.ime_bolesti }}
+      </div>
+      <div class="mb-2">
+        <label for="{{ bolest.datum_dijagnostike.id_for_label }}" class="form-label">Datum dijagnostike: </label>
+        {{ bolest.datum_dijagnostike }}
+      </div>
+      <div class="mb-2">
+        <label for="{{ bolest.vakcinisani_id.id_for_label }}" class="form-label">Vakcinisani ID: </label>
+        {{ bolest.vakcinisani_id }}
+      </div>
+      <input type="button" value="Zatvori">
+      <input type="submit" name="" value="Submit">
+    </form>
+
+  </div>
+</div>
+{% endfor %}
+
+
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
     <li class="list-group-item"><span style='display:none' id="za_tippy-{{i.id}}">{{i.ime}} <br> {{i.prezime}} <br> {{i.vakcina}} <br> {{i.jmbg}} </span>{{i.ime}} {{i.prezime}} <i class="fas fa-long-arrow-alt-right"></i>
        <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span>
+       <button type="button" class="btn btn-secondary float-end btn-sm ms-1 openmodal myBtn" name="button">Dodaj bolest</button>
        <a class="btn btn-warning float-end btn-sm ms-1 btn-tippy-2" data-template="za_tippy-{{i.id}}" href="{% url 'edit' i.id %}">Uredi</a>
-       <a class="btn btn-primary float-end btn-sm btn-tippy" data-template="za_tippy-{{i.id}}" href="{% url 'vakcinisan' i.id %}">Detalji</a>
+       <a class="btn btn-primary float-end btn-sm ms-1 btn-tippy" data-template="za_tippy-{{i.id}}" href="{% url 'vakcinisan' i.id %}">Detalji</a>
+
     </li>
     {% endfor %}
   </ul>
