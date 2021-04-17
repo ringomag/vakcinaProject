@@ -73,6 +73,6 @@ class BolestForm(ModelForm):
 
         widgets ={
             'ime_bolesti':forms.TextInput(attrs={'class':'form-control'}),
-            'datum_dijagnostike':forms.DateTimeInput(attrs={'class':'form-control'}),
-            'vakcinisani_id': forms.TextInput(attrs={'class':'form-control'})
+            'datum_dijagnostike':forms.DateInput(attrs={'class':'form-control', 'placeholder':"mm/dd/YYYY"}),
+            'vakcinisani_id': forms.Select(attrs={'class':'form-control'})
         }
