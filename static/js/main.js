@@ -60,6 +60,7 @@ var modals = document.getElementsByClassName('modal');
 // Get the button that opens the modal
 var btns = document.getElementsByClassName("openmodal");
 var spans=document.getElementsByClassName("close");
+var closeBTNS=document.getElementsByClassName('close-btn');
 for(let i=0;i<btns.length;i++){
     btns[i].onclick = function() {
         modals[i].style.display = "block";
@@ -69,4 +70,9 @@ for(let i=0;i<spans.length;i++){
     spans[i].onclick = function() {
         modals[i].style.display = "none";
     }
+}
+for(let i=0;i<closeBTNS.length;i++){
+  closeBTNS[i].onclick = function(){
+    modals[i].style.display = "none";
+  }
 }
