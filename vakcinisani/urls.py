@@ -16,4 +16,5 @@ urlpatterns = [
     # path('edit/<str:pk>', views.edit, name='edit'),
     path('vakcinisan/<str:pk>', EditVakcinisanView.as_view(), name='vakcinisan'),
     path('edit/<str:pk>', EditVakcinisanView.as_view(template_name='edit.html'), name='edit'),
+    path('lista/bolest/', views.bolest, name='lista_bolest'),
 ]

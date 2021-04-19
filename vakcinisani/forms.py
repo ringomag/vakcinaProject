@@ -3,9 +3,6 @@ from .models import Vakcinisan, Bolest
 from django import forms
 from django.core.exceptions import ValidationError
 from datetime import datetime
-import dateutil.parser
-
-
 
 
 class VakcinisanForm(ModelForm):
@@ -65,13 +62,10 @@ class ObavestiForm(forms.Form):
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':3}))
 
-
-
     def clean(self):
             cleaned_data = super().clean()
             datum = datetime.strptime(self.data['datum'], "%Y-%m-%dT%H:%M")
             cleaned_data['datum'] = datetime.strftime(datum, "%d-%m-%Y %H:%M")
-
             return cleaned_data
 
     def full_clean(self):
@@ -79,7 +73,6 @@ class ObavestiForm(forms.Form):
             if 'datum' in self.errors:
                 del self.errors['datum']
             return cleaned_data
-
 
 
 class BolestForm(ModelForm):
@@ -94,5 +87,4 @@ class BolestForm(ModelForm):
         widgets ={
             'ime_bolesti':forms.TextInput(attrs={'class':'form-control'}),
             'ime_doktora':forms.DateInput(attrs={'class':'form-control'}),
-            # 'vakcinisani_id': forms.Select(attrs={'class':'form-control'})
         }

@@ -80,8 +80,17 @@ class ObavestiView(View):
         return render(request, 'obavesti_korisnika.html', {'form':form, 'message_name':message_name})
 
 def bolest(request):
-    bolest = BolestForm
-    return render(request, 'lista.html', {'bolest':bolest})
+    if request.method == 'POST':
+        ime_bolesti = request.POST['ime_bolesti']
+        ime_doktora = request.POST['ime_doktora']
+
+        Bolest.objects.create(
+            ime_bolesti = ime_bolesti,
+            ime_doktora = ime_doktora
+        )
+        return HttpResponse('')
+
+    return render(request, 'lista.html', {})
 
 # #detalji
 # def vakcinisan(request, pk):

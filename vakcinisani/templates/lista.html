@@ -66,20 +66,19 @@
 <div class="modal-content">
   <span class="close">&times;</span>
     <h5>Upisite Vasu bolest</h5>
-    <form class="form-control" method="POST">
+    <form class="form-control form-bolest" method="POST">
       {% csrf_token %}
-      {{ form.non_field_errors }}
       <div class="mb-2">
-        <label for="{{ bolest.ime_bolesti.id_for_label }}" class="form-label">Ime bolesti: </label>
-        {{ bolest.ime_bolesti }}
+        <label for="ime_bolesti" class="form-label">Ime bolesti: </label>
+        <input type="text" name="ime_bolesti" value="" class="form-control js-ime-bolesti">
       </div>
-      
+
       <div class="mb-2">
-        <label for="{{ bolest.ime_doktora.id_for_label }}" class="form-label">Ime doktora: </label>
-        {{ bolest.ime_doktora }}
+        <label for="ime_doktora" class="form-label">Ime doktora: </label>
+        <input type="text" name="ime_doktora" value="" class="form-control js-ime-doktora">
       </div>
       <button type="button" class="close-btn btn btn-sm btn-secondary">Close</button>
-      <input type="submit" name="" class="btn btn-sm btn-info" value="Submit">
+      <input type="submit" name="" class="btn btn-sm btn-info js-submit" value="Submit">
     </form>
 
   </div>
@@ -114,6 +113,7 @@
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script src="{% static '/js/main.js' %}"> </script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 
 <script>
   // var astra = document.getElementById('vakcina_oboji');
@@ -148,6 +148,29 @@
         astra[i].style.color="green";
       }
     }
+</script>
+
+<script type="text/javascript">
+    $(document).on('submit', '.form-bolest', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url: 'bolest/',
+      data:{
+        ime_bolesti:$('.js-ime-bolesti').val(),
+        ime_doktora:$('.js-ime-doktora').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(){
+        alert("Kreirana nova bolest");
+
+      }
+    })
+
+
+});
 
 </script>
+
 {% endblock %}
