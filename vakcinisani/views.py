@@ -58,11 +58,14 @@ class ObavestiView(View):
     def post(self, request, *args, **kwargs):
         form = ObavestiForm
         form = ObavestiForm(request.POST)
+
         if form.is_valid():
+
             message_name = form.cleaned_data['ime']
-            message_content = "datum: " + str(form.cleaned_data['datum']) + " vreme: " + str(form.cleaned_data['vreme']) + " poruka: " + form.cleaned_data['poruka']
+            message_content = "datum: " + str(form.cleaned_data['datum']) + " poruka: " + form.cleaned_data['poruka']
             message_from = form.cleaned_data['mail']
             print('dobro je')
+            print(message_content)
 
             # send_mail
             send_mail(

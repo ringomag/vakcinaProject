@@ -2,6 +2,9 @@ from django.forms import ModelForm
 from .models import Vakcinisan, Bolest
 from django import forms
 from django.core.exceptions import ValidationError
+from datetime import datetime
+import dateutil.parser
+
 
 
 
@@ -47,7 +50,7 @@ class VakcinisanForm(ModelForm):
                     raise forms.ValidationError("Email adrese nisu iste")
 
 class DateInput(forms.DateInput):
-    input_type = 'date'
+    input_type = 'datetime-local'
 
 class TimeInput(forms.TimeInput):
     input_type = 'time'
@@ -58,21 +61,38 @@ class EmailInput(forms.EmailInput):
 class ObavestiForm(forms.Form):
     datum = forms.DateField(widget=DateInput(attrs={'class':'form-control'}))
     mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
-    vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
+    # vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':3}))
+
+
+
+    def clean(self):
+            cleaned_data = super().clean()
+            datum = datetime.strptime(self.data['datum'], "%Y-%m-%dT%H:%M")
+            cleaned_data['datum'] = datetime.strftime(datum, "%d-%m-%Y %H:%M")
+
+            return cleaned_data
+
+    def full_clean(self):
+            cleaned_data = super().full_clean()
+            if 'datum' in self.errors:
+                del self.errors['datum']
+            return cleaned_data
+
+
 
 class BolestForm(ModelForm):
     class Meta:
         model = Bolest
         fields = [
             'ime_bolesti',
-            'datum_dijagnostike',
-            'vakcinisani_id',
+            'ime_doktora',
+
         ]
 
         widgets ={
             'ime_bolesti':forms.TextInput(attrs={'class':'form-control'}),
-            'datum_dijagnostike':forms.DateInput(attrs={'class':'form-control', 'placeholder':"mm/dd/YYYY"}),
-            'vakcinisani_id': forms.Select(attrs={'class':'form-control'})
+            'ime_doktora':forms.DateInput(attrs={'class':'form-control'}),
+            # 'vakcinisani_id': forms.Select(attrs={'class':'form-control'})
         }
