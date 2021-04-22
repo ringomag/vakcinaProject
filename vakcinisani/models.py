@@ -7,6 +7,7 @@ class Bolest(models.Model):
     id = models.AutoField(primary_key=True)
     ime_bolesti = models.CharField(max_length=100)
     ime_doktora = models.CharField(max_length=100, null=True)
+
     def __str__(self):
         return self.ime_bolesti
 

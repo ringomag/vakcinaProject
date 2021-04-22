@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import VakcinisanForm, ObavestiForm, BolestForm
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views import View
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -27,6 +27,8 @@ class MethodView(View):
             messages.success(request, 'Uspešno ste se prijavili za vakcinaciju!')
             return redirect('lista')
         return render(request, self.template_name, {"form":form})
+
+
 
 #class based kad ima pk
 class EditVakcinisanView(View):
@@ -90,7 +92,7 @@ def bolest(request):
         )
         return HttpResponse('')
 
-    return render(request, 'lista.html', {})
+    
 
 # #detalji
 # def vakcinisan(request, pk):

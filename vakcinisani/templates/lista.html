@@ -66,16 +66,16 @@
 <div class="modal-content">
   <span class="close">&times;</span>
     <h5>Upisite Vasu bolest</h5>
-    <form class="form-control form-bolest" method="POST">
+    <form class="form-control form-bolest" id="form-bolest-{{i.id}}" method="POST">
       {% csrf_token %}
       <div class="mb-2">
         <label for="ime_bolesti" class="form-label">Ime bolesti: </label>
-        <input type="text" name="ime_bolesti" value="" class="form-control js-ime-bolesti">
+        <input type="text" name="ime_bolesti" value="" class="form-control js-ime-bolesti" id="za-bolest-{{i.id}}">
       </div>
 
       <div class="mb-2">
         <label for="ime_doktora" class="form-label">Ime doktora: </label>
-        <input type="text" name="ime_doktora" value="" class="form-control js-ime-doktora">
+        <input type="text" name="ime_doktora" value="" class="form-control js-ime-doktora" id="za-doktora-{{i.id}}">
       </div>
       <button type="button" class="close-btn btn btn-sm btn-secondary">Close</button>
       <input type="submit" name="" class="btn btn-sm btn-info js-submit" value="Submit">
@@ -151,25 +151,60 @@
 </script>
 
 <script type="text/javascript">
-    $(document).on('submit', '.form-bolest', function(e){
-    e.preventDefault();
 
-    $.ajax({
-      type:'POST',
-      url: 'bolest/',
-      data:{
-        ime_bolesti:$('.js-ime-bolesti').val(),
-        ime_doktora:$('.js-ime-doktora').val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-      },
-      success:function(){
-        alert("Kreirana nova bolest");
+    var bolestForms = document.getElementsByClassName('form-bolest');
+    var submitBtns = document.getElementsByClassName('js-submit');
+    var imena_bolesti = document.getElementsByClassName('js-ime-bolesti');
+    var imena_doktora = document.getElementsByClassName('js-ime-doktora');
+    console.log('ovo su forme', bolestForms);
+    for (var i=0; i<bolestForms.length; i++){
+      submitBtns[i].onclick = function(e){
+        e.preventDefault();
 
-      }
-    })
+        $.ajax({
+            type:'POST',
+            url: 'bolest/',
+            data:{
+              ime_bolesti:$('#za-bolest-{{i.id}}').val(),
+              ime_doktora:$('#za-doktora-{{i.id}}').val(),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+              alert("Kreirana nova bolest");
+
+            }
+          });
+        };
+
+      };
 
 
-});
+
+
+    //   $(document).on('submit', '#form-bolest-{{i.id}}', function(e){
+    //   e.preventDefault();
+    //
+    //
+    //   $.ajax({
+    //     type:'POST',
+    //     url: 'bolest/',
+    //     data:{
+    //       ime_bolesti:$('#za-bolest-{{i.id}}').val(),
+    //       ime_doktora:$('#za-doktora-{{i.id}}').val(),
+    //       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+    //     },
+    //     success:function(){
+    //       alert("Kreirana nova bolest");
+    //
+    //     }
+    //   });
+    // });
+
+
+
+
+
+
 
 </script>
 

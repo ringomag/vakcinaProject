@@ -78,11 +78,7 @@ class ObavestiForm(forms.Form):
 class BolestForm(ModelForm):
     class Meta:
         model = Bolest
-        fields = [
-            'ime_bolesti',
-            'ime_doktora',
-
-        ]
+        fields = "__all__"
 
         widgets ={
             'ime_bolesti':forms.TextInput(attrs={'class':'form-control'}),
