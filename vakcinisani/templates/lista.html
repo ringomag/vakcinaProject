@@ -151,29 +151,46 @@
 </script>
 
 <script type="text/javascript">
-
-    var bolestForms = document.getElementsByClassName('form-bolest');
+    // nije ti potrebna i lista dugmica i lista formi. Dovoljna je jedna od tih lista. Radicemo sa dugmicima.
     var submitBtns = document.getElementsByClassName('js-submit');
     var imena_bolesti = document.getElementsByClassName('js-ime-bolesti');
     var imena_doktora = document.getElementsByClassName('js-ime-doktora');
-    console.log('ovo su forme', bolestForms);
-    for (var i=0; i<bolestForms.length; i++){
+    for (var i=0; i<submitBtns.length; i++){
       submitBtns[i].onclick = function(e){
         e.preventDefault();
-
+        // posto si u for petlji i u njoj imas klik na dugme this je u stvari dugme. Ali je javascript objekat. Ako ga okruzis $() dobijes jquery objekat.
+        console.log('this', this);
+        var _this = $(this);
+        // za dato dugme nadjes formu u kojoj se nalazi i posto je funkcija closes javascript funkcija moras da okruzis objekat da bi dobio jquery objekat.
+        // Posto je serialize jquery funkcija, trebalo bi da radi na jquery objektu. zato smo okruzili formu.
+        var javascriptForma = $(this).closest('form');
+        var jqueryForma = $(javascriptForma);
+        var data = jqueryForma.serialize()
+        console.log("data", data);
         $.ajax({
             type:'POST',
             url: 'bolest/',
-            data:{
-              ime_bolesti:$('#za-bolest-{{i.id}}').val(),
-              ime_doktora:$('#za-doktora-{{i.id}}').val(),
-              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-            },
+            data:data,
             success:function(){
               alert("Kreirana nova bolest");
 
             }
           });
+
+
+        // $.ajax({
+        //     type:'POST',
+        //     url: 'bolest/',
+        //     data:{
+        //       ime_bolesti:$('#za-bolest-{{i.id}}').val(),
+        //       ime_doktora:$('#za-doktora-{{i.id}}').val(),
+        //       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        //     },
+        //     success:function(){
+        //       alert("Kreirana nova bolest");
+
+        //     }
+        //   });
         };
 
       };
