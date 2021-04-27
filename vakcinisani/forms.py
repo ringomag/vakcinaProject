@@ -16,6 +16,7 @@ class VakcinisanForm(ModelForm):
             'alergija',
             'email_1',
             'email_2',
+            'bolest_id',
         ]
         widgets = {
             'ime': forms.TextInput(attrs={'class':'form-control'}),
@@ -24,7 +25,9 @@ class VakcinisanForm(ModelForm):
             'email_1': forms.EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}),
             'email_2': forms.EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}),
             'vakcina': forms.Select(attrs={'class': 'form-control'}),
-            'alergija': forms.CheckboxInput()
+            'bolest_id': forms.Select(attrs={'class':'form-control'}),
+            'alergija': forms.CheckboxInput(),
+
         }
 
     def clean_jmbg(self):

@@ -21,6 +21,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'obavesti' %}">Obavesti korisnika</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'bolest' %}">Bolesti</a>
+      </li>
 
     </ul>
   </div>
@@ -53,6 +56,8 @@
 
         {% block scripts %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
         {% endblock %}
   </body>
 

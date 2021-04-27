@@ -22,7 +22,7 @@ body{
     left: 0 ; right: 0; bottom: 0;
     height:[footer-height];
 }
-p{
+.firstPage-paragraph{
   font-family:sans-serif;
   font-family: 'Charmonman', cursive;
   font-size: 19px;
@@ -35,10 +35,19 @@ p{
   font-style: oblique;
 }
 
+.detalji_bolesti_span{
+  font-family: 'Zen Dots', cursive;
+  color:#426cf5;
+}
+
 .tippy-box[data-theme~='blue'] {
   background-color: #bbeddc;
   color: #070b12;
   font-style: oblique;
+}
+
+#dugme-za-modal-bolest{
+  margin: 2em;
 }
 
 .tippy-box[data-theme~='blue'][data-placement^='right'] > .tippy-arrow::before {

@@ -88,7 +88,7 @@
 
   <ul class="list-group" id="moja_lista" name="lista">
     {% for i in kreirani %}
-    <li class="list-group-item"><span style='display:none' id="za_tippy-{{i.id}}">{{i.ime}} <br> {{i.prezime}} <br> {{i.vakcina}} <br> {{i.jmbg}} </span>{{i.ime}} {{i.prezime}} <i class="fas fa-long-arrow-alt-right"></i>
+    <li class="list-group-item"><span style='display:none' id="za_tippy-{{i.id}}">{{i.ime}} <br> {{i.prezime}} <br> {{i.vakcina}} <br> {{i.jmbg}} <br> {{i.bolest_id}} </span>{{i.ime}} {{i.prezime}} <i class="fas fa-long-arrow-alt-right"></i>
        <span class="vakcina_oboji {% if i.vakcina == 'Sinofarm' %} sinofarm {% endif %} ">{{i.vakcina}}</span>
        <button type="button" class="btn btn-secondary float-end btn-sm ms-1 openmodal myBtn"  name="button">Dodaj bolest</button>
        <a class="btn btn-warning float-end btn-sm ms-1 btn-tippy-2" data-template="za_tippy-{{i.id}}" href="{% url 'edit' i.id %}">Uredi</a>
@@ -176,26 +176,9 @@
 
             }
           });
-
-
-        // $.ajax({
-        //     type:'POST',
-        //     url: 'bolest/',
-        //     data:{
-        //       ime_bolesti:$('#za-bolest-{{i.id}}').val(),
-        //       ime_doktora:$('#za-doktora-{{i.id}}').val(),
-        //       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-        //     },
-        //     success:function(){
-        //       alert("Kreirana nova bolest");
-
-        //     }
-        //   });
         };
 
       };
-
-
 
 
     //   $(document).on('submit', '#form-bolest-{{i.id}}', function(e){
@@ -216,12 +199,6 @@
     //     }
     //   });
     // });
-
-
-
-
-
-
 
 </script>
 

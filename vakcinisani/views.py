@@ -81,18 +81,40 @@ class ObavestiView(View):
 
         return render(request, 'obavesti_korisnika.html', {'form':form, 'message_name':message_name})
 
+# ovo je ajax
 def bolest(request):
     if request.method == 'POST':
-        ime_bolesti = request.POST['ime_bolesti']
-        ime_doktora = request.POST['ime_doktora']
+        form = BolestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('')
 
-        Bolest.objects.create(
-            ime_bolesti = ime_bolesti,
-            ime_doktora = ime_doktora
-        )
-        return HttpResponse('')
+#dodavenje nove bolesti
+def dodaj_bolest(request):
+    bolesti = Bolest.objects.all()
+    form = BolestForm
+    if request.method == 'POST':
+        form = BolestForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request, 'bolest.html', {'bolesti':bolesti, 'form':form})
 
-    
+def detalji_bolest(request, pk):
+    bolesti = Bolest.objects.get(id=pk)
+    return render(request, 'detalji_bolesti.html', {"bolesti":bolesti})
+
+def izmeni_bolest(request, pk):
+    bolesti = Bolest.objects.get(id=pk)
+    form = BolestForm(instance=bolesti)
+    if request.method == 'POST':
+        form = BolestForm(request.POST, instance=bolesti)
+        if form.is_valid():
+            form.save()
+            return redirect('bolest')
+    return render(request, 'bolest_edit.html', {'bolesti':bolesti, "form":form})
+
+
+
 
 # #detalji
 # def vakcinisan(request, pk):

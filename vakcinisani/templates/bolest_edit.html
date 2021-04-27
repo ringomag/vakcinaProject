@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h3 class="m-3">Izmeni bolest</h3>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Sacuvaj izmene">
+  </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer>
+  <div class="text-center p-3" id="absolute" style="background-color: rgba(0, 0, 0, 0.2);">
+  © 2021 Copyright: Vaccine</div>
+</footer>
+{% endblock %}
