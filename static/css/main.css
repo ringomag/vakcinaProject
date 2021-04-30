@@ -53,3 +53,72 @@ body{
 .tippy-box[data-theme~='blue'][data-placement^='right'] > .tippy-arrow::before {
   border-right-color: blue;
 }
+
+#modal-za-bolest{
+  margin: 1.5em;
+  background-color: rgba(73, 89, 133, 0.7);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+}
+#modal-za-bolest:hover{
+  background-color: #ed344a;
+}
+
+.modal-bg{
+  position:absolute;
+  width: 100%;
+  height: 100vh;
+  top:0;
+  left:0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+.bg-active{
+  visibility: visible;
+  opacity: 1;
+}
+.modal-bolest{
+  position: relative;
+  background-color: white;
+  width: 45%;
+  height: 45%;
+  padding: 1em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dugme-u-modalu{
+  margin-left: auto;
+  margin-right: auto;
+  width:60%;
+  color: white;
+  background-color:#486369;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.zatvori-modal{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}

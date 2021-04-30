@@ -83,11 +83,14 @@ class ObavestiView(View):
 
 # ovo je ajax
 def bolest(request):
+    bolesti = Bolest.objects.all()
+    form = BolestForm
     if request.method == 'POST':
         form = BolestForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponse('')
+    return render(request, 'bolest.html', {'bolesti':bolesti, 'form':form})
 
 #dodavenje nove bolesti
 def dodaj_bolest(request):

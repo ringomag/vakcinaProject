@@ -16,8 +16,9 @@ urlpatterns = [
     # path('edit/<str:pk>', views.edit, name='edit'),
     path('vakcinisan/<str:pk>', EditVakcinisanView.as_view(), name='vakcinisan'),
     path('edit/<str:pk>', EditVakcinisanView.as_view(template_name='edit.html'), name='edit'),
-    path('lista/bolest/', views.bolest, name='lista_bolest'), #ovo je ajax
+    # path('lista/bolest/', views.bolest, name='lista_bolest'), #ovo je ajax
     path('bolest/', views.dodaj_bolest, name='bolest'),
     path('bolest/<str:pk>', views.detalji_bolest, name="detalji_bolest"),
     path('bolest_edit/<str:pk>', views.izmeni_bolest, name='izmeni_bolest'),
+    # path('bolest/dodaj-novu-bolest/', views.bolest, name="dodaj-novu-bolest"), ovo je ajax isto
 ]

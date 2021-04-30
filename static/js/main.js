@@ -75,4 +75,3 @@ for(let i=0;i<closeBTNS.length;i++){
   closeBTNS[i].onclick = function(){
     modals[i].style.display = "none";
   }
-}
