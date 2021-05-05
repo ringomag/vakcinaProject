@@ -112,6 +112,8 @@ submitBtn.onclick = function(e){
         `<tr>
           <td>${fields["ime_bolesti"]||""}</td>
           <td>${fields["ime_doktora"]||""}</td>
+          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="">Izmeni</a></td>
+          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="">Detalji</a></td>
         </tr>`
         )
 
