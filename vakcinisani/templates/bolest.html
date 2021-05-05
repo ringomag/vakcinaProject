@@ -105,7 +105,7 @@ submitBtn.onclick = function(e){
         $(javascriptForma)[0].reset();
         var instance = JSON.parse(response["data"]);
         var fields = instance[0]["fields"];
-        var id = (instance[0]["pk"];
+        var id = instance[0]["pk"];
         var dugmeIzmeni = document.getElementById('izmeni-za-ajax-{{i.id}}');
         var dugmeDetalji = document.getElementById('detalji-za-ajax-{{i.id}}');
         console.log("ovo su fields", fields);
