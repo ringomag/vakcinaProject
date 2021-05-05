@@ -90,6 +90,7 @@ def bolest(request):
             data = form.save()
             print("ovo je data: ", data)
             ser_data = serializers.serialize('json', [data,])
+            print("ovo je ser data ", ser_data)
             return JsonResponse({"data": ser_data}, status=200)
         else:
             return JsonResponse({"error": form.errors}, status=400)

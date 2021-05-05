@@ -105,9 +105,12 @@ submitBtn.onclick = function(e){
         $(javascriptForma)[0].reset();
         var instance = JSON.parse(response["data"]);
         var fields = instance[0]["fields"];
+        var id = (instance[0]["pk"];
         var dugmeIzmeni = document.getElementById('izmeni-za-ajax-{{i.id}}');
         var dugmeDetalji = document.getElementById('detalji-za-ajax-{{i.id}}');
         console.log("ovo su fields", fields);
+        console.log("ovo je id ", id);
+        //za sledeci deo se drkam, ne znam kako da pogodim onaj url kao a da ne koristim {i.id} varijantu...a uspeo sam da izvucem id od elementa (ima ga iznad u console.log)
         $('#tabelaBolesti tbody').prepend(
         `<tr>
           <td>${fields["ime_bolesti"]||""}</td>
