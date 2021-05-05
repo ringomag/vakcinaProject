@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views import View
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core import serializers
 
 # Class Based View
 class MethodView(View):
@@ -83,23 +84,27 @@ class ObavestiView(View):
 
 # ovo je ajax
 def bolest(request):
-    bolesti = Bolest.objects.all()
-    form = BolestForm
     if request.method == 'POST':
         form = BolestForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponse('')
-    return render(request, 'bolest.html', {'bolesti':bolesti, 'form':form})
+            data = form.save()
+            print("ovo je data: ", data)
+            ser_data = serializers.serialize('json', [data,])
+            return JsonResponse({"data": ser_data}, status=200)
+        else:
+            return JsonResponse({"error": form.errors}, status=400)
+    #some error ocured        
+    return JsonResponse({"error": ""}, status=400)
+
 
 #dodavenje nove bolesti
-def dodaj_bolest(request):
+def bolest_lista(request):
     bolesti = Bolest.objects.all()
     form = BolestForm
-    if request.method == 'POST':
-        form = BolestForm(request.POST)
-        if form.is_valid():
-            form.save()
+    # if request.method == 'POST':
+    #     form = BolestForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
     return render(request, 'bolest.html', {'bolesti':bolesti, 'form':form})
 
 def detalji_bolest(request, pk):

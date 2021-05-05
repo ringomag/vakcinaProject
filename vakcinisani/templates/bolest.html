@@ -24,7 +24,7 @@
 
 <!-- tabela sa izlistanim bolestima -->
   <div class="col">
-    <table class="table">
+    <table class="table" id="tabelaBolesti">
       <thead>
         <tr>
           <th>Ime bolesti</th>
@@ -88,7 +88,7 @@
 
 
 <!-- ovo je za ajax -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 var submitBtn = document.getElementById('submit-dugme');
 submitBtn.onclick = function(e){
   e.preventDefault();
@@ -100,13 +100,25 @@ submitBtn.onclick = function(e){
       type:'POST',
       url: 'dodaj-novu-bolest/',
       data:data,
-      success:function(){
-        alert("Kreirana nova bolest");
+      dataType:'json',
+      success:function(response){
+        var instance = JSON.parse(response["data"]);
+        var fields = instance[0]["fields"];
+        console.log("ovo su fields", fields);
+        $('#tabelaBolesti tbody').append(
+        `<tr>
+          <td>${fields["ime_bolesti"]||""}</td>
+          <td>${fields["ime_doktora"]||""}</td>
+          <td><a class="btn btn-warning btn-sm" href="">Izmeni</a></td>
+          <td><a class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="">Detalji</a></td>
+        </tr>`
+        )
 
-      }
+      },
+
     });
   };
 
-</script> -->
+</script>
 
 {% endblock %}
