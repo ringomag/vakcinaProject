@@ -38,8 +38,8 @@
         <tr>
           <td id="detalji-tippy-{{i.id}}">{{i.ime_bolesti}}</td>
           <td>{{i.ime_doktora}}</td>
-          <td><a class="btn btn-warning btn-sm" href="{% url 'izmeni_bolest' i.id %}">Izmeni</a></td>
-          <td><a class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="{% url 'detalji_bolest' i.id %}">Detalji</a></td>
+          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="{% url 'izmeni_bolest' i.id %}">Izmeni</a></td>
+          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="{% url 'detalji_bolest' i.id %}">Detalji</a></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -102,15 +102,16 @@ submitBtn.onclick = function(e){
       data:data,
       dataType:'json',
       success:function(response){
+        $(javascriptForma)[0].reset();
         var instance = JSON.parse(response["data"]);
         var fields = instance[0]["fields"];
+        var dugmeIzmeni = document.getElementById('izmeni-za-ajax-{{i.id}}');
+        var dugmeDetalji = document.getElementById('detalji-za-ajax-{{i.id}}');
         console.log("ovo su fields", fields);
-        $('#tabelaBolesti tbody').append(
+        $('#tabelaBolesti tbody').prepend(
         `<tr>
           <td>${fields["ime_bolesti"]||""}</td>
           <td>${fields["ime_doktora"]||""}</td>
-          <td><a class="btn btn-warning btn-sm" href="">Izmeni</a></td>
-          <td><a class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="">Detalji</a></td>
         </tr>`
         )
 

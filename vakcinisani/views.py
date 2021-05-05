@@ -93,13 +93,13 @@ def bolest(request):
             return JsonResponse({"data": ser_data}, status=200)
         else:
             return JsonResponse({"error": form.errors}, status=400)
-    #some error ocured        
+    #some error ocured
     return JsonResponse({"error": ""}, status=400)
 
 
 #dodavenje nove bolesti
 def bolest_lista(request):
-    bolesti = Bolest.objects.all()
+    bolesti = Bolest.objects.all().order_by('-id')
     form = BolestForm
     # if request.method == 'POST':
     #     form = BolestForm(request.POST)
