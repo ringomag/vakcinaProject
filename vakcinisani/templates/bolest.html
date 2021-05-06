@@ -38,8 +38,8 @@
         <tr>
           <td id="detalji-tippy-{{i.id}}">{{i.ime_bolesti}}</td>
           <td>{{i.ime_doktora}}</td>
-          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="{% url 'izmeni_bolest' i.id %}">Izmeni</a></td>
-          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="{% url 'detalji_bolest' i.id %}">Detalji</a></td>
+          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm izmeni-za-ajax" href="{% url 'izmeni_bolest' i.id %}">Izmeni</a></td>
+          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy detalji-za-ajax" data-template="detalji-tippy-{{i.id}}" href="{% url 'detalji_bolest' i.id %}">Detalji</a></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -105,17 +105,21 @@ submitBtn.onclick = function(e){
         $(javascriptForma)[0].reset();
         var instance = JSON.parse(response["data"]);
         var fields = instance[0]["fields"];
-        var id = (instance[0]["pk"];
-        var dugmeIzmeni = document.getElementById('izmeni-za-ajax-{{i.id}}');
-        var dugmeDetalji = document.getElementById('detalji-za-ajax-{{i.id}}');
+        var id = instance[0]["pk"];
+        var dugmeIzmeni = document.getElementsByClassName('izmeni-za-ajax');
+        var dugmeDetalji = document.getElementsByClassName('detalji-za-ajax');
         console.log("ovo su fields", fields);
         console.log("ovo je id ", id);
-        //za sledeci deo se drkam, ne znam kako da pogodim onaj url kao a da ne koristim {i.id} varijantu...a uspeo sam da izvucem id od elementa (ima ga iznad u console.log)
+        console.log("dugme izmeni, ", dugmeIzmeni[0]);
+        console.log("dugme detalji, ", dugmeDetalji[0]);
+        var link = "/bolest_edit/"+id;
+        console.log("ovo je link ", link);
+        //ciganski potez za link ali radi :)
         $('#tabelaBolesti tbody').prepend(
         `<tr>
-          <td>${fields["ime_bolesti"]||""}</td>
-          <td>${fields["ime_doktora"]||""}</td>
-          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="">Izmeni</a></td>
+          <td>${fields["ime_bolesti"]}</td>
+          <td>${fields["ime_doktora"]}</td>
+          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="${link}">Izmeni</a></td>
           <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="">Detalji</a></td>
         </tr>`
         )
