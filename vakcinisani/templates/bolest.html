@@ -112,15 +112,17 @@ submitBtn.onclick = function(e){
         console.log("ovo je id ", id);
         console.log("dugme izmeni, ", dugmeIzmeni[0]);
         console.log("dugme detalji, ", dugmeDetalji[0]);
-        var link = "/bolest_edit/"+id;
-        console.log("ovo je link ", link);
+        var linkBolestEdit = "/bolest_edit/"+id;
+        var linkDetalji = "/bolest/"+id;
+        console.log("ovo je link za edit ", linkBolestEdit);
+        console.log("ovo je link za detalje", linkDetalji);
         //ciganski potez za link ali radi :)
         $('#tabelaBolesti tbody').prepend(
         `<tr>
           <td>${fields["ime_bolesti"]}</td>
           <td>${fields["ime_doktora"]}</td>
-          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="${link}">Izmeni</a></td>
-          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="">Detalji</a></td>
+          <td><a id="izmeni-za-ajax-{{i.id}}" class="btn btn-warning btn-sm" href="${linkBolestEdit}">Izmeni</a></td>
+          <td><a id="detalji-za-ajax-{{i.id}}" class="btn btn-info btn-sm detalji-tippy" data-template="detalji-tippy-{{i.id}}" href="${linkDetalji}">Detalji</a></td>
         </tr>`
         )
 
