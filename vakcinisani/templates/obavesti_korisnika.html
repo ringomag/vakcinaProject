@@ -4,8 +4,8 @@
 
 
 {% block content %}
-<br>
-<h2 class="ms-3"> Obavesti korisnika</h2><hr>
+
+<h2 class="m-3"> Obavesti korisnika</h2><hr>
 <div class="container">
   {% if message_name %}
     <center><h2>Hvala {{message_name}}</h2></center>
@@ -15,19 +15,19 @@
       <form method="POST" class="form-control">
         {% csrf_token %}
         {{ form.non_field_errors }}
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="{{ form.ime.id_for_label }}" class="form-label">Vase Ime: </label>
           {{ form.ime }}
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="{{ form.email.id_for_label }}" class="form-label">Email: </label>
           {{ form.mail }}
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="{{ form.poruka.id_for_label }}" class="form-label">Poruka: </label>
           {{ form.poruka }}
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="{{ form.datum.id_for_label }}" class="form-label">Datum i vreme: </label>
           {{ form.datum }}
         </div>

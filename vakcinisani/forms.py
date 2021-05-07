@@ -63,7 +63,7 @@ class ObavestiForm(forms.Form):
     mail = forms.EmailField(widget=EmailInput(attrs={'class': 'form-control', 'placeholder':"someone@something.com"}))
     # vreme = forms.TimeField(widget=TimeInput(attrs={'class':'form-control'}))
     ime = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':3}))
+    poruka = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows':2}))
 
     def clean(self):
             cleaned_data = super().clean()
