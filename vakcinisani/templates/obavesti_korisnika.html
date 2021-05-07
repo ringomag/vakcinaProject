@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+
 {% block content %}
 <br>
 <h2 class="ms-3"> Obavesti korisnika</h2><hr>
@@ -9,7 +11,7 @@
     <center><h2>Hvala {{message_name}}</h2></center>
   {% endif %}
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-5">
       <form method="POST" class="form-control">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -35,6 +37,7 @@
 
   </div>
 </div>
+<div class="push"></div>
 </div>
 {% endblock %}
 
@@ -42,7 +45,7 @@
 
 {% block footer %}
 <footer>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="text-center p-3" id="absolute" style="background-color: rgba(0, 0, 0, 0.2);">
   © 2021 Copyright: Vaccine</div>
 </footer>
 {% endblock %}
