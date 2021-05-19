@@ -30,7 +30,7 @@ class Vakcinisan(models.Model):
     datum = models.DateTimeField(auto_now_add=True, null=True)
     email_1 = models.EmailField(max_length=100, null=True)
     email_2 = models.EmailField(max_length=100, null=True)
-    bolest_id = models.ForeignKey(Bolest, to_field="id", null=True, on_delete=models.SET_NULL)
+    bolest_id = models.ForeignKey(Bolest, to_field="id", blank="True", null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.ime + ' ' + self.prezime + ' ' + self.vakcina
