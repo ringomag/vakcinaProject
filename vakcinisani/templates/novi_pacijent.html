@@ -133,6 +133,7 @@ function disabled_funkcija() {
   var dugme_koje_ce_biti_disabled = document.getElementById('dodaj_dugme');
   if (element_na_kome_se_desio_event.checked) {
     console.log('cekirano');
+    alert('Ne možete se prijaviti ukoliko ste alergični.')
     dugme_koje_ce_biti_disabled.setAttribute("disabled", true);
   }
   else {
